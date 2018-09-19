@@ -14,17 +14,13 @@ func init() {
 	}
 
 	R(&SUpdateListOptions{}, "update-list", "List updates", func(s *mcclient.ClientSession, args *SUpdateListOptions) error {
-		var params *jsonutils.JSONDict
-		var err error
-		var result *modules.ListResult
-		if len(args.Region) > 0 {
-			result, err = modules.Updates.ListInContext(s, params, &modules.Cloudregions, args.Region)
-		} else {
-			result, err = modules.Updates.List(s, params)
-		}
+		// TODO filer by region
+		result, err := modules.Updates.List(s, nil)
+
 		if err != nil {
 			return err
 		}
+
 		printList(result, modules.Updates.GetColumns(s))
 		return nil
 	})
