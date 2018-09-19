@@ -1,5 +1,10 @@
 package modules
 
+import (
+	"yunion.io/x/jsonutils"
+	"yunion.io/x/onecloud/pkg/mcclient"
+)
+
 type SUpdateManager struct {
 	ResourceManager
 }
@@ -7,6 +12,12 @@ type SUpdateManager struct {
 var (
 	Updates SUpdateManager
 )
+
+func (this *SUpdateManager) DoUpdate(s *mcclient.ClientSession, params jsonutils.JSONObject) (jsonutils.JSONObject, error) {
+	ret := jsonutils.NewDict()
+	this.PerformAction(s, "", "", params)
+	return ret, nil
+}
 
 func init() {
 

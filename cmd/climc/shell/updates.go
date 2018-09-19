@@ -8,20 +8,13 @@ import (
 )
 
 func init() {
-	type UpdateListOptions struct {
+	type SUpdateListOptions struct {
 		options.BaseListOptions
 		Region string `help:"cloud region ID or Name"`
 	}
-	R(&UpdateListOptions{}, "update-list", "List updates", func(s *mcclient.ClientSession, args *UpdateListOptions) error {
-		var params *jsonutils.JSONDict
-		{
-			var err error
-			params, err = args.BaseListOptions.Params()
-			if err != nil {
-				return err
 
-			}
-		}
+	R(&SUpdateListOptions{}, "update-list", "List updates", func(s *mcclient.ClientSession, args *SUpdateListOptions) error {
+		var params *jsonutils.JSONDict
 		var err error
 		var result *modules.ListResult
 		if len(args.Region) > 0 {
@@ -32,6 +25,26 @@ func init() {
 		if err != nil {
 			return err
 		}
+		printList(result, modules.Updates.GetColumns(s))
+		return nil
+	})
+
+	type SUpdatePerformOptions struct {
+		Cmp bool `help:"update all the compute nodes automatically"`
+	}
+
+	R(&SUpdatePerformOptions{}, "update-perform", "Update the Controler", func(s *mcclient.ClientSession, args *SUpdatePerformOptions) error {
+		params := jsonutils.NewDict()
+		if args.Cmp {
+			params.Add(jsonutils.JSONTrue, "cmp")
+		}
+
+		result, err := modules.Updates.List(s, nil)
+
+		if err != nil {
+			return err
+		}
+		modules.Updates.DoUpdate(s, params)
 		printList(result, modules.Updates.GetColumns(s))
 		return nil
 	})
