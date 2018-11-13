@@ -3777,6 +3777,8 @@ func (self *SGuest) GetShortDesc() *jsonutils.JSONDict {
 	desc := self.SStandaloneResourceBase.GetShortDesc()
 	desc.Set("mem", jsonutils.NewInt(int64(self.VmemSize)))
 	desc.Set("cpu", jsonutils.NewInt(int64(self.VcpuCount)))
+	address := jsonutils.NewString(strings.Join(self.getRealIPs(), ","))
+	desc.Set("ip_addr", address)
 	templateId := self.GetTemplateId()
 	if len(templateId) > 0 {
 		desc.Set("cpu", jsonutils.NewString(templateId))
