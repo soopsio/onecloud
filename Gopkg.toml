@@ -103,9 +103,5 @@
   name = "github.com/Microsoft/azure-vhd-utils"
 
 [[constraint]]
-  branch = "master"
-  name = "github.com/texttheater/golang-levenshtein"
-
-[[constraint]]
   name = "github.com/360EntSecGroup-Skylar/excelize"
   version = "v1.3.0"

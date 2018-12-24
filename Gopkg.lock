@@ -859,14 +859,6 @@
   version = "v1.2.2"
 
 [[projects]]
-  branch = "master"
-  digest = "1:a38c75e7edd595bbaa03334c1ac26163a5e990d81f05cd9ec5fd0edc9c786078"
-  name = "github.com/texttheater/golang-levenshtein"
-  packages = ["levenshtein"]
-  pruneopts = "UT"
-  revision = "d188e65d659ef53fcdb0691c12f1bba64928b649"
-
-[[projects]]
   digest = "1:98e5cda86f67cd1ac95389d98670b66dea8cae480fe6292b83bccccfe60b4106"
   name = "github.com/ugorji/go"
   packages = ["codec"]
