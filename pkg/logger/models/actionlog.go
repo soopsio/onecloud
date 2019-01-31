@@ -14,11 +14,11 @@ type SActionlog struct {
 
 	StartTime time.Time `nullable:"false" list:"user"`                           // = Column(DateTime, nullable=False)
 	Success   bool      `default:"true" list:"user"`                             // = Column(Boolean, default=True)
-	Action    string    `width:"32" charset:"utf8" nullable:"false" list:"user"` //= Column(VARCHAR(32, charset='utf8'), nullable=False)
+
 }
 
-var ActonLog *SActionlogManager
+var ActionLog *SActionlogManager
 
 func init() {
-	ActonLog = &SActionlogManager{db.SOpsLogManager{db.NewModelBaseManager(SActionlog{}, "action_tbl", "action", "actions")}}
+	ActionLog = &SActionlogManager{db.SOpsLogManager{db.NewModelBaseManager(SActionlog{}, "action_tbl", "action", "actions")}}
 }
